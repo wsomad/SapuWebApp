@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 :root {
     --primary-color: #E2B808;
     --secondary-color: #ffffff;
@@ -10,7 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'roboto-regular', sans-serif;
+    font-family: "DM Sans", sans-serif;
 }
 
 body {
@@ -60,19 +62,20 @@ header .navigation-bar {
     color: var(--primary-color);
 }
 
-.first-section, .second-section {
-    height: 100vh;
+.first-section, .third-section, .fourth-section {
+    height: 80vh;
     display: flex;
     align-items: center;
     padding: 20px;
 }
 
-.first-section .container-content, .second-section .container-content {
+.first-section .container-content {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    margin-top: 180px;
 }
 
 .first-section .content {
@@ -86,7 +89,8 @@ header .navigation-bar {
 
 .first-section .content p {
     font-weight: 500;
-    margin-top: 15px;
+    font-size: 1rem;
+    margin-top: 10px;
     max-width: 600px;
 }
 
@@ -162,6 +166,98 @@ header .navigation-bar {
     color: var(--primary-color);
 }
 
+.second-section {
+    height: 20vh;
+}
+
+.second-section .container-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 90px;
+}
+
+.second-section .content h1 {
+    font-size: 2.5rem;
+}
+
+.second-section  .content p {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.third-section {
+    height: 80vh;
+}
+
+.third-section .container-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 90px;
+}
+
+.third-section .content h1 {
+    font-size: 2.5rem;
+}
+
+.third-section  .content p {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.fourth-section {
+    height: 80vh;
+}
+
+.fourth-section .container-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.fourth-section .content h1 {
+    font-size: 2.5rem;
+}
+
+.fourth-section  .content p {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.fifth-section {
+    height: 50vh;
+}
+
+.fifth-section .container-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.fifth-section .content h1 {
+    font-size: 2.5rem;
+}
+
+.fifth-section  .content p {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
 #menu-button {
     color: var(--primary-color);
     cursor: pointer;
@@ -177,17 +273,13 @@ header .navigation-bar {
     cursor: pointer;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
     #menu-button, #close-menu-button {
         display: block;
     }
 
-    .first-section .content {
-        display: none;
-    }
-
-    .first-section .sign-in-content {
-        margin: 0 auto;
+    .navigation-bar {
+        padding: 0 20px;
     }
 
     .navigation-bar .menu-links {
@@ -208,5 +300,37 @@ header .navigation-bar {
 
     .navigation-bar a {
         color: var(--primary-text-color);
+    }
+
+    .first-section .container-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .first-section .content {
+        text-align: center;
+        top: -50px;
+    }
+
+    .first-section .content h1 {
+        font-size: 3rem;
+    }
+
+    .first-section .content p {
+        margin: 20px auto;
+    }
+
+    .first-section .content button {
+        display: none;
+    }
+
+    .first-section .container-content .sign-in-content {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .first-section .content h1 {
+        font-size: 2.5rem;
     }
 }
