@@ -12,11 +12,13 @@ public class RentalHistoryModel {
 	private String location;
 	private String rentalType;
 	private String status;
+	private PaymentModel payment;
+	private static int counter = 1;
 	
-	public RentalHistoryModel(String rentalID, VehicleModel vehicle, Date startDate, Date endDate,
+	public RentalHistoryModel(VehicleModel vehicle, Date startDate, Date endDate,
 			double rentalRate, String status) {
 		super();
-		this.rentalID = rentalID;
+		this.rentalID = generateRentalID();
 		this.vehicle = vehicle;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -27,7 +29,7 @@ public class RentalHistoryModel {
 	public RentalHistoryModel(String rentalID, VehicleModel vehicle, Date startDate, Date endDate, boolean availability,
 			double rentalRate, String location, String rentalType, String status) {
 		super();
-		this.rentalID = rentalID;
+		this.rentalID = generateRentalID();
 		this.vehicle = vehicle;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -36,6 +38,10 @@ public class RentalHistoryModel {
 		this.location = location;
 		this.rentalType = rentalType;
 		this.status = status;
+	}
+	
+	private synchronized String generateRentalID() {
+		return String.format("r%06d", counter++);
 	}
 	
 	public String getRentalID() {
@@ -119,5 +125,12 @@ public class RentalHistoryModel {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public PaymentModel getPayment() {
+		return payment;
+	}
+	public void setPayment(PaymentModel payment) {
+		this.payment = payment;
 	}
 }

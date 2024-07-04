@@ -21,7 +21,7 @@ public class VehicleModel {
 	
 	public VehicleModel() {
 		super();
-		setVehicleID(vehicleID);
+		setVehicleID(generateVehicleID());
 	}
 	
 	public VehicleModel(String brand, String model, String yearManufactured, String bodyStyle) {
@@ -37,7 +37,7 @@ public class VehicleModel {
 			String chasisNumber, String engineNumber, int images, String insuranceName, String insuranceType,
 			String insuranceExpiryDate, boolean availability, double rentalRate, String location, String rentalType) {
 		super();
-		this.vehicleID = vehicleID;
+		this.vehicleID = generateVehicleID();
 		this.brand = brand;
 		this.bodyStyle = bodyStyle;
 		this.model = model;
@@ -53,6 +53,10 @@ public class VehicleModel {
 		this.insuranceName = insuranceName;
 		this.insuranceType = insuranceType;
 		this.insuranceExpiryDate = insuranceExpiryDate;
+	}
+	
+	private synchronized String generateVehicleID() {
+		return String.format("v%06d", counter++);
 	}
 
 	public String getVehicleID() {

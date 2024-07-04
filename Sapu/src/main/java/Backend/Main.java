@@ -17,7 +17,7 @@ public class Main {
 
         // Creating a Rental object (assuming you have a Car class defined)
         VehicleModel vehicle = new VehicleModel("Toyota", "Camry", "2021", "Sedan");
-        RentalHistoryModel rental = new RentalHistoryModel("rental001", vehicle, new Date(), new Date(System.currentTimeMillis() + 86400000), 100.0, "Active");
+        RentalHistoryModel rental = new RentalHistoryModel(vehicle, new Date(), new Date(System.currentTimeMillis() + 86400000), 100.0, "Active");
 
         // Creating a RenterModel object
         RenterModel renter = new RenterModel("renter@example.com", "password123", "John", "012345678", 100.00, driverLicense, new ArrayList<>());
@@ -30,6 +30,7 @@ public class Main {
         // Printing the details
         System.out.println("Renter UID: " + renter.getUID());
         System.out.println("Renter UID: " + renter.getUsername());
+        System.out.println("Rental UID: " + rental.getRentalID());
         System.out.println("Partner UID: " + partner.getUID());
         System.out.println("Partner UID: " + partner.getUsername());
     }
