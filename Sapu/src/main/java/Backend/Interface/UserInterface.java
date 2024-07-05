@@ -10,5 +10,5 @@ public interface UserInterface {
 	UserModel getUserByUsername(String username);
 	List<UserModel> getAllUsers();
 	boolean updateUser(UserModel user);
-	boolean deleteUser(UserModel user);
+	boolean deleteUser(String UID);
 }

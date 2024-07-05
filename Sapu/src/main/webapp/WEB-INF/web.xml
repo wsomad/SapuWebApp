@@ -19,4 +19,14 @@
     <servlet-name>AuthenticationController</servlet-name>
     <url-pattern>/AuthenticationController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SignUpController</display-name>
+    <servlet-name>SignUpController</servlet-name>
+    <servlet-class>Backend.Controller.SignUpController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignUpController</servlet-name>
+    <url-pattern>/SignUpController</url-pattern>
+  </servlet-mapping>
 </web-app>
