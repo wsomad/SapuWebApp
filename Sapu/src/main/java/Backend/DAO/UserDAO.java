@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Backend.Interface.UserInterface;
+import Backend.Interface.BaseCRUD;
 import Backend.Model.UserModel;
 import Backend.Service.DatabaseService;
 
-public class UserDAO implements UserInterface {
+public class UserDAO implements BaseCRUD<UserModel> {
 	private Connection connection;
 	
 	public UserDAO() {
@@ -23,7 +23,7 @@ public class UserDAO implements UserInterface {
 	}
 
 	@Override
-	public boolean createUser(UserModel user) {
+	public boolean create(UserModel user) {
 		String sql = "INSERT INTO USER ("
 				+ "email, "
 				+ "password, "
@@ -44,9 +44,9 @@ public class UserDAO implements UserInterface {
 			return false;
 		}
 	}
-
+	
 	@Override
-	public UserModel getUserByUID(String UID) {
+	public UserModel read(String UID) {
 		String sql = "SELECT * FROM USER WHERE UID =" + UID;
 		try(PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, UID);
@@ -61,8 +61,7 @@ public class UserDAO implements UserInterface {
 		return null;
 	}
 
-	@Override
-	public UserModel getUserByUsername(String username) {
+	public UserModel readByUsername(String username) {
 		String sql = "SELECT * FROM USER WHERE username = ?";
 		try(PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, username);
@@ -77,8 +76,7 @@ public class UserDAO implements UserInterface {
 		return null;
 	}
 
-	@Override
-	public List<UserModel> getAllUsers() {
+	public List<UserModel> readAll() {
 		List<UserModel> userList = new ArrayList<>();
 		String sql = "SELECT * FROM USER";
 		try(PreparedStatement statement = connection.prepareStatement(sql);
@@ -93,7 +91,7 @@ public class UserDAO implements UserInterface {
 	}
 
 	@Override
-	public boolean updateUser(UserModel user) {
+	public boolean update(UserModel user) {
 		String sql = "UPDATE USER SET email = ?, "
 				+ "password = ?, "
 				+ "username = ?, "
@@ -115,7 +113,7 @@ public class UserDAO implements UserInterface {
 	}
 
 	@Override
-	public boolean deleteUser(String UID) {
+	public boolean delete(String UID) {
 		String sql = "DELETE FROM USER WHERE UID = ?";
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, UID);
