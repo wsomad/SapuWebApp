@@ -15,11 +15,9 @@ import Backend.DAO.UserDAO;
 @WebServlet("path_of_sign_up_page")
 public class SignUpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDAO userDAO;
-	
 	public void init() throws ServletException {
 		super.init();
-		userDAO = new UserDAO();
+		new UserDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

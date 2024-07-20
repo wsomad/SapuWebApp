@@ -9,14 +9,14 @@ import java.util.List;
 
 import Backend.Interface.BaseCRUD;
 import Backend.Model.UserModel;
-import Backend.Service.DatabaseService;
+import Backend.Service.DatabaseInit;
 
 public class UserDAO implements BaseCRUD<UserModel> {
 	private Connection connection;
 	
 	public UserDAO() {
 		try {
-			this.connection = DatabaseService.getConnection();
+			this.connection = DatabaseInit.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -25,18 +25,20 @@ public class UserDAO implements BaseCRUD<UserModel> {
 	@Override
 	public boolean create(UserModel user) {
 		String sql = "INSERT INTO USER ("
+				+ "UID"
 				+ "email, "
 				+ "password, "
 				+ "username, "
 				+ "phoneNumber, "
 				+ "walletBalance"
-				+ ") VALUES (?, ?, ?, ?)";
+				+ ") VALUES (?, ?, ?, ?, ?)";
 		try(PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, user.getEmail());
-			statement.setString(1, user.getPassword());
-			statement.setString(1, user.getUsername());
-			statement.setString(1, user.getPhoneNumber());
-			statement.setDouble(1, user.getWalletBalance());
+			statement.setString(1, user.getUID());
+			statement.setString(2, user.getEmail());
+			statement.setString(3, user.getPassword());
+			statement.setString(4, user.getUsername());
+			statement.setString(5, user.getPhoneNumber());
+			statement.setDouble(6, user.getWalletBalance());
 			int rowsInserted = statement.executeUpdate();
 			return rowsInserted > 0;
 		} catch (Exception e) {
@@ -47,31 +49,16 @@ public class UserDAO implements BaseCRUD<UserModel> {
 	
 	@Override
 	public UserModel read(String UID) {
-		String sql = "SELECT * FROM USER WHERE UID =" + UID;
+		String sql = "SELECT * FROM USER WHERE UID = ?";
 		try(PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, UID);
 			try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return getUserFromResultSet(resultSet);
+                    return readResultSet(resultSet);
                 }
             }
 		} catch (Exception e) {
 			 e.printStackTrace();
-		}
-		return null;
-	}
-
-	public UserModel readByUsername(String username) {
-		String sql = "SELECT * FROM USER WHERE username = ?";
-		try(PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, username);
-			try(ResultSet result = statement.executeQuery()) {
-				if (result.next()) {
-					return getUserFromResultSet(result);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
@@ -82,20 +69,21 @@ public class UserDAO implements BaseCRUD<UserModel> {
 		try(PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet result = statement.executeQuery()) {
 			while (result.next()) {
-				userList.add(getUserFromResultSet(result));
+				userList.add(readResultSet(result));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return userList;
 	}
 
 	@Override
 	public boolean update(UserModel user) {
-		String sql = "UPDATE USER SET email = ?, "
-				+ "password = ?, "
-				+ "username = ?, "
-				+ "phoneNumber = ?, "
+		String sql = "UPDATE USER SET"
+				+ "email = ?,"
+				+ "password = ?,"
+				+ "username = ?,"
+				+ "phoneNumber = ?,"
 				+ "walletBalance = ?"
 				+ "WHERE UID = ?";
 		try(PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -104,6 +92,7 @@ public class UserDAO implements BaseCRUD<UserModel> {
 			statement.setString(3, user.getUsername());
 			statement.setString(4, user.getPhoneNumber());
 			statement.setDouble(5, user.getWalletBalance());
+			statement.setString(6, user.getUID());
 			int rowsUpdated = statement.executeUpdate();
 			return rowsUpdated > 0;
 		} catch (Exception e) {
@@ -125,7 +114,7 @@ public class UserDAO implements BaseCRUD<UserModel> {
         }
 	}
 	
-	private UserModel getUserFromResultSet(ResultSet result) throws SQLException {
+	private UserModel readResultSet(ResultSet result) throws SQLException {
 		UserModel user = new UserModel();
 		user.setUID(result.getString("UID"));
 		user.setEmail(result.getString("email"));
