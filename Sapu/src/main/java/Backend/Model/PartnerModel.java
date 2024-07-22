@@ -15,11 +15,11 @@ public class PartnerModel extends UserModel {
     }
 
     // Getters and setters
-    public List<VehicleModel> getCarsList() {
+    public List<VehicleModel> getVehicleList() {
         return vehicleList;
     }
 
-    public void setCarsList(List<VehicleModel> vehicleList) {
+    public void setVehicleList(List<VehicleModel> vehicleList) {
         this.vehicleList = vehicleList;
     }
 
@@ -31,11 +31,11 @@ public class PartnerModel extends UserModel {
         this.rating = rating;
     }
 
-    public String getPaymentInfo() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPaymentInfo(String payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
 }

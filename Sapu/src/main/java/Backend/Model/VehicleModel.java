@@ -2,6 +2,7 @@ package Backend.Model;
 
 public class VehicleModel {
 	private String vehicleID;
+	private String UID;
 	private String brand;
 	private String bodyStyle;
 	private String model;
@@ -32,12 +33,13 @@ public class VehicleModel {
 		this.yearManufactured = yearManufactured;
 	}
 	
-	public VehicleModel(String vehicleID, String brand, String bodyStyle, String model, int numberOfSeater,
+	public VehicleModel(String vehicleID, String UID, String brand, String bodyStyle, String model, int numberOfSeater,
 			String color, String yearManufactured, String plateNumber, String fuel, String transmission,
 			String chasisNumber, String engineNumber, int images, String insuranceName, String insuranceType,
 			String insuranceExpiryDate, boolean availability, double rentalRate, String location, String rentalType) {
 		super();
 		this.vehicleID = generateVehicleID();
+		this.UID = UID;
 		this.brand = brand;
 		this.bodyStyle = bodyStyle;
 		this.model = model;
@@ -64,6 +66,13 @@ public class VehicleModel {
 	}
 	public void setVehicleID(String vehicleID) {
 		this.vehicleID = vehicleID;
+	}
+	
+	public String getUID() {
+		return UID;
+	}
+	public void setUID(String uID) {
+		UID = uID;
 	}
 	
 	public String getBrand() {
