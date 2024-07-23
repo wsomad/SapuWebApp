@@ -14,7 +14,10 @@ public class PartnerModel extends UserModel {
         this.payment = payment;
     }
 
-    // Getters and setters
+    public PartnerModel() {
+	}
+
+	// Getters and setters
     public List<VehicleModel> getVehicleList() {
         return vehicleList;
     }

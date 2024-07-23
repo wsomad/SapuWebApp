@@ -154,6 +154,18 @@ public class VehicleDAO implements BaseCRUD<VehicleModel> {
         }
 	}
 	
+	public boolean deleteByOwnerUID(String UID) {
+		String sql = "DELETE FROM VEHICLE WHERE UID = ?";
+		try(PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setString(1, UID);
+			int rowsDeleted = statement.executeUpdate();
+			return rowsDeleted > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	private VehicleModel readResultSet(ResultSet result) throws SQLException {
 		VehicleModel vehicleModel = new VehicleModel();
 		vehicleModel.setVehicleID(result.getString("VehicleID"));
